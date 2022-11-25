@@ -1,14 +1,17 @@
 import React, { useContext, useState } from 'react';
+import { GoogleAuthProvider } from 'firebase/auth';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/Authprovider';
 
 const LogIn = () => {
     const { register, formState:{errors}, handleSubmit } = useForm()
-    const {LogIn}=useContext(AuthContext)
+    const {LogIn,googleLogIn}=useContext(AuthContext)
+    const googleProvider = new GoogleAuthProvider();
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
+
     const handleLogin=data=>{
         console.log(data);
         LogIn(data.email,data.password)
@@ -18,6 +21,18 @@ const LogIn = () => {
             navigate(from,{replace: true})
         })
         .catch(error =>console.log(error));
+    }
+
+    const handleGoogleLogIn = () => {
+        googleLogIn(googleProvider)
+        .then(result => {
+                const user = result.user;
+                console.log(user);
+                navigate(from);
+            })
+            .catch(error => {
+                console.error(error);
+            })
     }
     return (
         <div className='h-[800px] flex justify-center items-center bg-slate-200  '>
@@ -48,7 +63,7 @@ const LogIn = () => {
                 </form>
                 <p className='text-center text-white'>New the website!!! <Link to='/register' className='text-white font-bold'>Please SIGN UP</Link></p>
                 <div className="divider"></div> 
-                <input type="submit" value="GOOGLE" className='btn w-full my-3' />
+                <button onClick={handleGoogleLogIn} className='btn w-full my-3' >Google</button>
             </div>
         </div>
     );
