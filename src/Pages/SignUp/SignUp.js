@@ -1,29 +1,37 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/Authprovider';
 
-const LogIn = () => {
+const SignUp = () => {
     const { register, formState:{errors}, handleSubmit } = useForm()
-    const {LogIn}=useContext(AuthContext)
-    const location = useLocation();
-    const navigate = useNavigate();
-    const from = location.state?.from?.pathname || '/';
-    const handleLogin=data=>{
+    const {createUser,updateUser}=useContext(AuthContext);
+    const handleSignup=data=>{
         console.log(data);
-        LogIn(data.email,data.password)
+        createUser(data.email,data.password)
         .then(result =>{
             const user = result.user;
             console.log(user);
-            navigate(from,{replace: true})
+            const userInfo ={
+                displayName:data.name
+            }
+            updateUser(userInfo)
+            .then(()=>{})
+            .catch(err=>console.log(err));
         })
         .catch(error =>console.log(error));
     }
     return (
         <div className='h-[800px] flex justify-center items-center bg-slate-200  '>
             <div className='w-96 p-7 bg-cyan-700 rounded'>
-                <h2 className='text-4xl font-bold text-white mb-5'>SIGN IN</h2>
-                <form onSubmit={handleSubmit(handleLogin)}>
+                <h2 className='text-4xl font-bold text-white mb-5'>SIGN UP</h2>
+                <form onSubmit={handleSubmit(handleSignup)}>
+                <div className="form-control w-full max-w-xs mb-5">
+                        <label className="label">
+                            <span className="label-text text-white">Enter Your Name</span>
+                        </label>
+                        <input type="text" className="input input-bordered w-full max-w-xs" {...register("name")} placeholder="" />
+                    </div>
                     <div className="form-control w-full max-w-xs mb-5">
                         <label className="label">
                             <span className="label-text text-white">Enter Your Email</span>
@@ -46,12 +54,10 @@ const LogIn = () => {
                     </div>
                     <input type="submit" value="SUBMIT" className='btn w-full my-3' />
                 </form>
-                <p className='text-center text-white'>New the website!!! <Link to='/register' className='text-white font-bold'>Please SIGN UP</Link></p>
-                <div className="divider"></div> 
-                <input type="submit" value="GOOGLE" className='btn w-full my-3' />
+                <p className='text-center text-white'>Already Registered!!! <Link to='/login' className='text-white font-bold'>Please Log IN</Link></p>
             </div>
         </div>
     );
 };
 
-export default LogIn;
+export default SignUp;
