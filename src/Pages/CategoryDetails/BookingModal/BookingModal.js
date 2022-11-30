@@ -26,7 +26,7 @@ const BookingModal = ({booking, setBooking}) => {
             location
         }
 
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://resale-market-server-side-lake.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

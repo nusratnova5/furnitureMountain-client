@@ -24,7 +24,7 @@ const router =createBrowserRouter([
             {
                 path:'/',
                 loader: async() =>{
-                    return fetch(`http://localhost:5000/categories`);
+                    return fetch(`https://resale-market-server-side-lake.vercel.app/categories`);
                 },
                 element:<Home></Home>
             },
@@ -43,7 +43,7 @@ const router =createBrowserRouter([
             {
                 path:'/card/:id',
                 loader: async ({params}) => {
-                    return fetch(`http://localhost:5000/category_details?id=${params.id}`)
+                    return fetch(`https://resale-market-server-side-lake.vercel.app/category_details?id=${params.id}`)
                 },
                 element:<CategoryDetailsCard></CategoryDetailsCard>
             }
