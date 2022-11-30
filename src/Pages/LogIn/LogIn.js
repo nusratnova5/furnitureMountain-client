@@ -6,8 +6,7 @@ import { AuthContext } from '../../Contexts/Authprovider';
 import useToken from '../../hooks/useToken';
 
 const LogIn = () => {
-    const { register, formState:{errors}, handleSubmit } = useForm()
-    const {LogIn,googleLogIn}=useContext(AuthContext)
+    const {LogIn,googleLogIn}=useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
     const location = useLocation();
     const navigate = useNavigate();
@@ -16,10 +15,13 @@ const LogIn = () => {
     const [loginUserEmail, setLogInUserEmail] = useState('');
     const [token] = useToken(loginUserEmail);
 
+    console.log(token);
+
     if(token){
         navigate(from, {replace: true});
     }
 
+    const { register, formState:{errors}, handleSubmit } = useForm();
     const handleLogin=data=>{
         LogIn(data.email,data.password)
         .then(result =>{
@@ -27,7 +29,9 @@ const LogIn = () => {
             console.log(user);
             setLogInUserEmail(data.email);
         })
-        .catch(error =>console.log(error));
+        .catch(error =>{
+            console.log(error)
+        });
     }
 
     const handleGoogleLogIn = () => {
@@ -45,7 +49,7 @@ const LogIn = () => {
         <div className='h-[800px] flex justify-center items-center bg-slate-200  '>
             <div className='w-96 p-7 bg-cyan-700 rounded'>
                 <h2 className='text-4xl font-bold text-white mb-5'>SIGN IN</h2>
-                <form onSubmit={handleSubmit(handleLogin)}>
+                <form onSubmit={ handleSubmit(handleLogin) }>
                     <div className="form-control w-full max-w-xs mb-5">
                         <label className="label">
                             <span className="label-text text-white">Enter Your Email</span>
@@ -60,10 +64,10 @@ const LogIn = () => {
                         <input type="password" className="input input-bordered w-full max-w-xs" {...register("password",{required:true})} placeholder="" />
                     </div>
 
-                    <input type="submit" value="SUBMIT" className='btn w-full my-3' />
+                    <input type="submit" value="Login" className='btn w-full my-3' />
                 </form>
                 <p className='text-center text-white'>New the website!!! <Link to='/register' className='text-white font-bold'>Please SIGN UP</Link></p>
-                <div className="divider"></div> 
+                <div className="divider">Or</div> 
                 <button onClick={handleGoogleLogIn} className='btn w-full my-3' >Google</button>
             </div>
         </div>

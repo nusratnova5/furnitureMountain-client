@@ -3,7 +3,7 @@ import React from 'react';
 const DashBoard = () => {
     return (
         <div>
-            DashBoard
+            <h2 className='text-3xl'>You have got your access based on your role</h2>
         </div>
     );
 };
