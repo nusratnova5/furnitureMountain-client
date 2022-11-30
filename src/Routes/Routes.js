@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom"
 import DashBoardLayout from "../Layout/DashBoardLayout";
 import Main from "../Layout/Main"
+import Banner from "../Pages/Banner/Banner";
 import Blog from "../Pages/Blog/Blog";
 import CategoryDetailsCard from "../Pages/CategoryDetails/CategoryDetailsCard";
 import AddAProduct from "../Pages/DashBoard/AddAProduct/AddAProduct";
@@ -46,7 +47,12 @@ const router =createBrowserRouter([
                     return fetch(`https://resale-market-server-side-lake.vercel.app/category_details?id=${params.id}`)
                 },
                 element:<CategoryDetailsCard></CategoryDetailsCard>
+            },
+            {
+                path:'/banner',
+                element:<Banner></Banner>
             }
+
             
         ]
     },
