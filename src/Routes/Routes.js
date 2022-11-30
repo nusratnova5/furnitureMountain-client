@@ -1,6 +1,9 @@
 import { createBrowserRouter } from "react-router-dom"
+import DashBoardLayout from "../Layout/DashBoardLayout";
 import Main from "../Layout/Main"
-import CategoryDetails from "../Pages/CategoryDetails/CategoryDetails";
+import Blog from "../Pages/Blog/Blog";
+import CategoryDetailsCard from "../Pages/CategoryDetails/CategoryDetailsCard";
+import MyBookings from "../Pages/DashBoard/MyBookings/MyBookings";
 import Home from "../Pages/Home/Home"
 import LogIn from "../Pages/LogIn/LogIn";
 import SignUp from "../Pages/SignUp/SignUp";
@@ -13,6 +16,9 @@ const router =createBrowserRouter([
         children: [
             {
                 path:'/',
+                loader: async() =>{
+                    return fetch(`http://localhost:5000/categories`);
+                },
                 element:<Home></Home>
             },
             {
@@ -24,10 +30,27 @@ const router =createBrowserRouter([
                 element:<SignUp></SignUp>
             },
             {
-                path:'/details',
-                element:<PrivateRoute><CategoryDetails></CategoryDetails></PrivateRoute>
+                path:'/blog',
+                element:<Blog></Blog>
+            },
+            {
+                path:'/card/:id',
+                loader: async ({params}) => {
+                    return fetch(`http://localhost:5000/category_details?id=${params.id}`)
+                },
+                element:<CategoryDetailsCard></CategoryDetailsCard>
             }
             
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <DashBoardLayout></DashBoardLayout>,
+        children: [
+            {
+                path: '/dashboard',
+                element: <MyBookings></MyBookings>
+            }
         ]
     }
 ])

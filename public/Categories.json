@@ -1,0 +1,62 @@
+[
+    {
+        "name":"DESK",
+        "categoryName":"Classroom Furniture",
+        "location":"Gulsan",
+        "resale_price":"1500",
+        "original_price":"2500",
+        "year":"2017",
+        "img":"https://www.falseflooring.com/images/products/desk.jpg",
+        "categoryID":"6383cce39c0e5f62b3dc2057"
+      },
+      {
+        "name":"PLAY SChOOL FURNITURE",
+        "categoryName":"Classroom Furniture",
+        "location":"Banani",
+        "resale_price":"2200",
+        "original_price":"4000",
+        "year":"2018",
+        "img":"https://okplay.in/wp-content/uploads/2021/03/Blog-3-image-1.jpg",
+        "categoryID":"6383cce39c0e5f62b3dc2057"
+      },
+      {
+        "name":"SOFA SET",
+        "categoryName":"Living Room Furniture",
+        "location":"Uttara",
+        "resale_price":"40000",
+        "original_price":"50000",
+        "year":"2019",
+        "img":"https://www.coasterfurniture.com/wp-content/uploads/gano-living-room-set.png",
+        "categoryID":"6383cce39c0e5f62b3dc2056"
+      },
+    {
+        "name":"TV Cabinet",
+        "categoryName":"Living Room Furniture",
+        "location":"Mirpur",
+        "resale_price":"8000",
+        "original_price":"10000",
+        "year":"2020",
+        "img":"https://hatil.in/sites/default/files/styles/hatil_product_list_crop/public/Gustav-122_0_0.jpg?itok=ZITFgyIV",
+        "categoryID":"6383cce39c0e5f62b3dc2056"
+    }  ,
+    {
+        "name":"Double Size Bed",
+        "categoryName":"Bed Room Furniture",
+        "location":"Rampura",
+        "resale_price":"50000",
+        "original_price":"60000",
+        "year":"2021",
+        "img":"http://admin.hatimfurniturebd.com/images/category/20181130_Bed_room_render.jpg",
+        "categoryID":"6383cce39c0e5f62b3dc2055"
+    }  ,
+    {
+        "name":"Almirah",
+        "categoryName":"Bed Room Furniture",
+        "location":"Malibag",
+        "resale_price":"45000",
+        "original_price":"35000",
+        "year":"2022",
+        "img":"https://admin.regalfurniturebd.com/storage/uploads/fullsize/2021-05/cbh-308-new.jpg",
+        "categoryID":"6383cce39c0e5f62b3dc2055"
+    }  
+]

@@ -1,9 +1,19 @@
 import React from 'react';
+import { useLoaderData } from 'react-router-dom';
+import CategoryDetailsCard from './CategoryDetailsCard';
 
 const CategoryDetails = () => {
+    const categoryDetails = useLoaderData();
+    console.log(categoryDetails)
     return (
-        <div>
-            this is category
+        <div className=''>
+           {
+              categoryDetails.map(details => <CategoryDetailsCard
+                key={details._id}
+                details={details}
+                ></CategoryDetailsCard>
+              )
+            }
         </div>
     );
 };

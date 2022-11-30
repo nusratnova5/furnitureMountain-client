@@ -3,6 +3,7 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/Authprovider';
+import useToken from '../../hooks/useToken';
 
 const LogIn = () => {
     const { register, formState:{errors}, handleSubmit } = useForm()
@@ -12,13 +13,19 @@ const LogIn = () => {
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
 
+    const [loginUserEmail, setLogInUserEmail] = useState('');
+    const [token] = useToken(loginUserEmail);
+
+    if(token){
+        navigate(from, {replace: true});
+    }
+
     const handleLogin=data=>{
-        console.log(data);
         LogIn(data.email,data.password)
         .then(result =>{
             const user = result.user;
             console.log(user);
-            navigate(from,{replace: true})
+            setLogInUserEmail(data.email);
         })
         .catch(error =>console.log(error));
     }
@@ -28,7 +35,7 @@ const LogIn = () => {
         .then(result => {
                 const user = result.user;
                 console.log(user);
-                navigate(from);
+                navigate(from,{replace: true})
             })
             .catch(error => {
                 console.error(error);
@@ -52,13 +59,7 @@ const LogIn = () => {
                         </label>
                         <input type="password" className="input input-bordered w-full max-w-xs" {...register("password",{required:true})} placeholder="" />
                     </div>
-                    <div className='my-2'>
-                    <select {...register("category", { required: true })}>
-                        <option value="">Select...</option>
-                        <option value="A">Option A</option>
-                        <option value="B">Option B</option>
-                    </select>
-                    </div>
+
                     <input type="submit" value="SUBMIT" className='btn w-full my-3' />
                 </form>
                 <p className='text-center text-white'>New the website!!! <Link to='/register' className='text-white font-bold'>Please SIGN UP</Link></p>

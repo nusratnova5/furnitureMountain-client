@@ -1,25 +1,54 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/Authprovider';
+import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
     const { register, formState:{errors}, handleSubmit } = useForm()
     const {createUser,updateUser}=useContext(AuthContext);
+    const [createUserEmail, setCreatedUserEmail] =useState('');
+    const navigate = useNavigate();
+
+    const [token] = useToken(createUserEmail);
+
+    if(token){
+        navigate('/');
+    }
+
     const handleSignup=data=>{
         console.log(data);
         createUser(data.email,data.password)
         .then(result =>{
             const user = result.user;
             console.log(user);
+            toast.success('User Created Successfully');
             const userInfo ={
                 displayName:data.name
             }
             updateUser(userInfo)
-            .then(()=>{})
+            .then(()=>{
+                saveUsers(data?.name, data?.email, data?.role)
+            })
             .catch(err=>console.log(err));
         })
         .catch(error =>console.log(error));
+    }
+
+    const saveUsers = (name, email, role) => {
+        const user = { name, email, role };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                setCreatedUserEmail(email);
+            })
     }
     return (
         <div className='h-[800px] flex justify-center items-center bg-slate-200  '>
@@ -45,12 +74,16 @@ const SignUp = () => {
                         </label>
                         <input type="password" className="input input-bordered w-full max-w-xs" {...register("password",{required:true})} placeholder="" />
                     </div>
-                    <div className='my-2'>
-                    <select {...register("category", { required: true })}>
-                        <option value="">Select...</option>
-                        <option value="A">Option A</option>
-                        <option value="B">Option B</option>
-                    </select>
+
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Are you a seller or buyer?</span>
+                        </label>
+                        <select {...register("role")} className="select select-bordered">
+                            <option disabled selected>Pick one</option>
+                            <option>Buyer</option>
+                            <option>Seller</option>
+                        </select>
                     </div>
                     <input type="submit" value="SUBMIT" className='btn w-full my-3' />
                 </form>
