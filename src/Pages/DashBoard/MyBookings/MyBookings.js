@@ -6,7 +6,7 @@ import MyBooking from './MyBooking';
 const MyBookings = () => {
     const {user} = useContext(AuthContext);
 
-    const url = `https://resale-market-server-side-lake.vercel.app/bookings?email=${user?.email}`;
+    const url = `https://resale-market-server-side-nusratnova5.vercel.app/bookings?email=${user?.email}`;
 
     const { data: mybookings = []} = useQuery({
         queryKey: ['bookings', user?.email],

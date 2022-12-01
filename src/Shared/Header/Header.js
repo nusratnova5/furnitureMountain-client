@@ -32,14 +32,14 @@ const Header = () => {
       {
         user?.uid?
         <>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/dashboard'>Dashboard</Link></li>
-        <li><Link to='/blog'>Blog</Link></li>
+        <li><Link to='/' className='text-white'>Home</Link></li>
+        <li><Link to='/dashboard' className='text-white'>Dashboard</Link></li>
+        <li><Link to='/blog' className='text-white'>Blog</Link></li>
         </>
         :
         <>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/blog'>Blog</Link></li>
+        <li><Link to='/' className='text-white'>Home</Link></li>
+        <li><Link to='/blog' className='text-white'>Blog</Link></li>
         </>
         
       }
@@ -52,12 +52,12 @@ const Header = () => {
     {
       user?.uid?
       <>
-      <Link to='' className="btn"><button onClick={handlelogOut}>SIGN OUT</button></Link>
+      <Link to='' className="btn className='text-white'"><button onClick={handlelogOut}>SIGN OUT</button></Link>
       </>
       :
       <>
-      <Link to='/register' className="btn">SIGN UP</Link>
-      <Link to='/login' className="btn">SIGN IN</Link>
+      <Link to='/register' className="btn className='text-white'">SIGN UP</Link>
+      <Link to='/login' className="btn className='text-white'">SIGN IN</Link>
       </>
       
     }

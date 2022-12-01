@@ -12,6 +12,7 @@ import DashBoard from "../Pages/DashBoard/DashBoard/DashBoard";
 import MyBookings from "../Pages/DashBoard/MyBookings/MyBookings";
 import MyOrders from "../Pages/DashBoard/MyOrders/MyOrders";
 import MyProducts from "../Pages/DashBoard/MyProducts/MyProducts";
+import Payment from "../Pages/DashBoard/Payment/Payment";
 import Home from "../Pages/Home/Home"
 import LogIn from "../Pages/LogIn/LogIn";
 import SignUp from "../Pages/SignUp/SignUp";
@@ -25,7 +26,7 @@ const router =createBrowserRouter([
             {
                 path:'/',
                 loader: async() =>{
-                    return fetch(`https://resale-market-server-side-lake.vercel.app/categories`);
+                    return fetch(`https://resale-market-server-side-nusratnova5.vercel.app/categories`);
                 },
                 element:<Home></Home>
             },
@@ -44,7 +45,7 @@ const router =createBrowserRouter([
             {
                 path:'/card/:id',
                 loader: async ({params}) => {
-                    return fetch(`https://resale-market-server-side-lake.vercel.app/category_details?id=${params.id}`)
+                    return fetch(`https://resale-market-server-side-nusratnova5.vercel.app/category_details?id=${params.id}`)
                 },
                 element:<CategoryDetailsCard></CategoryDetailsCard>
             },
@@ -87,6 +88,13 @@ const router =createBrowserRouter([
             {
                 path: '/dashboard/myorders',
                 element: <MyOrders></MyOrders>
+            },
+            {
+                path: '/dashboard//paid/:id',
+                loader: async({params}) => {
+                    return fetch(`https://resale-market-server-side-nusratnova5.vercel.app/bookings/${params.id}`);
+                },
+                element: <Payment></Payment>
             },
         ]
     }

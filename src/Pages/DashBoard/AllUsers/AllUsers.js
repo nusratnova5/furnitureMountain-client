@@ -7,14 +7,14 @@ const AllUsers = () => {
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('https://resale-market-server-side-lake.vercel.app/users');
+            const res = await fetch('https://resale-market-server-side-nusratnova5.vercel.app/users');
             const data = await res.json();
             return data;
         }
     });
 
     const handdleAdmin = id => {
-        fetch(`https://resale-market-server-side-lake.vercel.app/users/admin/${id}`, {
+        fetch(`https://resale-market-server-side-nusratnova5.vercel.app/users/admin/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

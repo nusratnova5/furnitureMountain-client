@@ -10,34 +10,53 @@ import { AuthContext } from '../../../Contexts/Authprovider';
 const AddAProduct = () => {
     const { register, formState:{errors}, handleSubmit } = useForm();
     const {user}=useContext(AuthContext);
+    const imageHostKey = process.env.REACT_APP_imgbb_key;
     const handleAddProduct = (data) => {
-        if(data.categoryName === "Classroom Furniture"){
-            data.categoryID = "6383cce39c0e5f62b3dc2057"
-        };
-        if(data.categoryName === "Living aroom Furniture"){
-            data.categoryID = "6383cce39c0e5f62b3dc2056"
-        }
-        if(data.categoryName === "Bedroom Furniture"){
-            data.categoryID = "6383cce39c0e5f62b3dc2055"
-        };
-        if(user){
-            data.sellerEmail = user.email;
-        }
 
-        fetch('https://assignment-12-server-grsagor.vercel.app/books', {
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append('image', image);
+        const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`;
+
+        fetch(url, {
             method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(data)
+            body: formData
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if(data?.acknowledged){
-                    toast.success('Product Added')
+        .then(res => res.json())
+        .then(imgData => {
+            if(imgData.success){
+                data.img = imgData.data.url;
+
+                if(data.cat_name === "Classroom Furniture"){
+                    data.cat_id = "6383cce39c0e5f62b3dc2057"
+                };
+                if(data.cat_name === "Living aroom Furniture"){
+                    data.cat_id = "6383cce39c0e5f62b3dc2056"
                 }
-            })
+                if(data.cat_name === "Bedroom Furniture"){
+                    data.cat_id = "6383cce39c0e5f62b3dc2055"
+                };
+                if(user){
+                    data.sellerEmail = user.email;
+                }
+
+                fetch('https://resale-market-server-side-nusratnova5.vercel.app/products', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        if(data?.acknowledged){
+                            toast.success('Product Added')
+                        }
+                    })
+            }
+        })
+
     }
     return (
         <div className='flex justify-center items-center bg-slate-200 p-10  '>
@@ -64,9 +83,9 @@ const AddAProduct = () => {
                     </div>
                     <div className="form-control w-full max-w-xs mb-5">
                         <label className="label">
-                            <span className="label-text text-white">IMAGE URL</span>
+                            <span className="label-text text-white">IMAGE</span>
                         </label>
-                        <input type="text" className="input input-bordered w-full max-w-xs" {...register("img")} placeholder="" />
+                        <input type="file" className="input input-bordered w-full max-w-xs" {...register("image")} placeholder="" />
                     </div>
                     <div className="form-control w-full max-w-xs mb-5">
                         <label className="label">
