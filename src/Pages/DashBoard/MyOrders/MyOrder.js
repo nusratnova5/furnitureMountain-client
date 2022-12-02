@@ -5,8 +5,8 @@ const MyOrder = ({ order }) => {
     const { _id, img, productName, price } = order;
     return (
         <div>
-            <div className="card glass lg:card-side bg-base-100 shadow-xl">
-                <figure><img src={img} alt="Album" /></figure>
+            <div className="card glass lg:card-side bg-base-100 shadow-xl m-5">
+                <figure><img src={img} alt="Album" className='h-72 w-72' /></figure>
                 <div className="card-body">
                     <h2 className="card-title">{productName}</h2>
                     <h2>{price}</h2>

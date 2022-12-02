@@ -1,7 +1,7 @@
 import React from 'react';
 import toast from 'react-hot-toast';
 
-const MyProduct = ({product}) => {
+const MyProduct = ({product,handleDelete}) => {
     const addAdvertise = () => {
         console.log(product)
 
@@ -21,6 +21,7 @@ const MyProduct = ({product}) => {
             })
 
         }
+        
     return (
         
             
@@ -28,7 +29,7 @@ const MyProduct = ({product}) => {
                                 <th>{product?.name}</th>
                                 <td>{product?.re_price}</td>
                                 <td>Advertise</td>
-                                <td>Delete</td>
+                                <td><button onClick={()=> handleDelete(product._id)} className='btn btn-xs btn-error'>Delete</button></td>
                                 <td><button onClick={addAdvertise} className='btn btn-xs btn-primary'>Advertise</button></td>
                         </tr>
 

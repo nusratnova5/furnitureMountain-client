@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../Contexts/Authprovider';
 import MyProduct from '../../MyProduct/MyProduct';
+import toast from 'react-hot-toast';
+
 
 const MyProducts = () => {
     const {user} = useContext(AuthContext);
@@ -13,6 +15,19 @@ const MyProducts = () => {
             return data;
         }
     });
+    const handleDelete = id => {
+        fetch(`https://resale-market-server-side-nusratnova5.vercel.app/product/${id}`, {
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.deletedCount > 0){
+                toast.success('Deleted Successfully');
+                refetch();
+            }
+        })
+    }
    console.log(products)
     return (
         <div>
@@ -32,6 +47,7 @@ const MyProducts = () => {
                             products.map(product=><MyProduct
                             key={product._id}
                             product={product}
+                            handleDelete={handleDelete}
                             ></MyProduct>)
                         }
                     </tbody>

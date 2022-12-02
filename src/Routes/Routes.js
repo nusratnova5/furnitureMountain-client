@@ -16,6 +16,7 @@ import Payment from "../Pages/DashBoard/Payment/Payment";
 import Home from "../Pages/Home/Home"
 import LogIn from "../Pages/LogIn/LogIn";
 import SignUp from "../Pages/SignUp/SignUp";
+import Error from "./Error";
 import PrivateRoute from "./PrivateRoute";
 
 const router =createBrowserRouter([
@@ -52,9 +53,7 @@ const router =createBrowserRouter([
             {
                 path:'/banner',
                 element:<Banner></Banner>
-            }
-
-            
+            }, 
         ]
     },
     {
@@ -97,6 +96,10 @@ const router =createBrowserRouter([
                 element: <Payment></Payment>
             },
         ]
+    },
+    {
+        path:'/*',
+        element:<Error></Error>
     }
 ])
 
