@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Contexts/Authprovider';
 
@@ -9,6 +9,7 @@ import { AuthContext } from '../../../Contexts/Authprovider';
 
 const AddAProduct = () => {
     const { register, formState:{errors}, handleSubmit } = useForm();
+    const navigate = useNavigate();
     const {user}=useContext(AuthContext);
     const imageHostKey = process.env.REACT_APP_imgbb_key;
     const handleAddProduct = (data) => {
@@ -30,7 +31,7 @@ const AddAProduct = () => {
                 if(data.cat_name === "Classroom Furniture"){
                     data.cat_id = "6383cce39c0e5f62b3dc2057"
                 };
-                if(data.cat_name === "Living aroom Furniture"){
+                if(data.cat_name === "Livingroom Furniture"){
                     data.cat_id = "6383cce39c0e5f62b3dc2056"
                 }
                 if(data.cat_name === "Bedroom Furniture"){
@@ -52,6 +53,7 @@ const AddAProduct = () => {
                         console.log(data)
                         if(data?.acknowledged){
                             toast.success('Product Added')
+                            navigate('/dashboard/myproducts');
                         }
                     })
             }

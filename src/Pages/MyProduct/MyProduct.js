@@ -1,26 +1,7 @@
 import React from 'react';
-import toast from 'react-hot-toast';
 
-const MyProduct = ({product,handleDelete}) => {
-    const addAdvertise = () => {
-        console.log(product)
-
-        fetch('https://resale-market-server-side-nusratnova5.vercel.app/advertise', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(product)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if(data?.acknowledged){
-                    toast.success('Product Added')
-                }
-            })
-
-        }
+const MyProduct = ({product,handleDelete,addAdvertise}) => {
+   
         
     return (
         
@@ -30,7 +11,7 @@ const MyProduct = ({product,handleDelete}) => {
                                 <td>{product?.re_price}</td>
                                 <td>Advertise</td>
                                 <td><button onClick={()=> handleDelete(product._id)} className='btn btn-xs btn-error'>Delete</button></td>
-                                <td><button onClick={addAdvertise} className='btn btn-xs btn-primary'>Advertise</button></td>
+                                <td><button onClick={()=>addAdvertise(product._id)} className='btn btn-xs btn-primary'>Advertise</button></td>
                         </tr>
 
         

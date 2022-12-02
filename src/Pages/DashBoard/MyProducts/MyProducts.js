@@ -29,6 +29,19 @@ const MyProducts = () => {
         })
     }
    console.log(products)
+   const addAdvertise = (id) => {
+    fetch(`https://resale-market-server-side-nusratnova5.vercel.app/categoryDetails/advertise/${id}`, {
+        method: 'PUT',
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            if(data.modifiedCount>0){
+                toast.success('Advertised');
+                refetch();
+            }
+        })
+}
     return (
         <div>
             <h2 className='text-3xl'>My Products</h2>
@@ -48,6 +61,7 @@ const MyProducts = () => {
                             key={product._id}
                             product={product}
                             handleDelete={handleDelete}
+                            addAdvertise={addAdvertise}
                             ></MyProduct>)
                         }
                     </tbody>

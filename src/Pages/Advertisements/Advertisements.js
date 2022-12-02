@@ -8,7 +8,7 @@ const Advertisements = () => {
     const { data: products = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('https://resale-market-server-side-nusratnova5.vercel.app/advertise');
+            const res = await fetch('https://resale-market-server-side-nusratnova5.vercel.app/category_details?advertise=yes');
             const data = await res.json();
             return data;
         }

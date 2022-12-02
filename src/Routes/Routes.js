@@ -16,6 +16,7 @@ import Payment from "../Pages/DashBoard/Payment/Payment";
 import Home from "../Pages/Home/Home"
 import LogIn from "../Pages/LogIn/LogIn";
 import SignUp from "../Pages/SignUp/SignUp";
+import AdminRoute from "./AdminRoute/AdminRoute";
 import Error from "./Error";
 import PrivateRoute from "./PrivateRoute";
 
@@ -70,11 +71,11 @@ const router =createBrowserRouter([
             },
             {
                 path: '/dashboard/allsellers',
-                element: <AllSeller></AllSeller>
+                element: <AdminRoute><AllSeller></AllSeller></AdminRoute>
             },
             {
                 path: '/dashboard/allbuyers',
-                element: <AllBuyers></AllBuyers>
+                element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
             },
             {
                 path: '/dashboard/addaproduct',
