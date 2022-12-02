@@ -47,7 +47,7 @@ const router =createBrowserRouter([
                 loader: async ({params}) => {
                     return fetch(`https://resale-market-server-side-nusratnova5.vercel.app/category_details?id=${params.id}`)
                 },
-                element:<CategoryDetailsCard></CategoryDetailsCard>
+                element:<PrivateRoute><CategoryDetailsCard></CategoryDetailsCard></PrivateRoute>
             },
             {
                 path:'/banner',

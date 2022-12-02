@@ -21,8 +21,22 @@ const Header = () => {
       </label>
       {/* responsive */}
       <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-        <li><Link to='/'>Home</Link></li>
-        <li><a>Item 3</a></li>
+        {/* <li><Link to='/'>Home</Link></li>
+        <li><a>Item 3</a></li> */}
+        {
+        user?.uid?
+        <>
+        <li><Link to='/' className='text-white'>Home</Link></li>
+        <li><Link to='/dashboard' className='text-white'>Dashboard</Link></li>
+        <li><Link to='/blog' className='text-white'>Blog</Link></li>
+        </>
+        :
+        <>
+        <li><Link to='/' className='text-white'>Home</Link></li>
+        <li><Link to='/blog' className='text-white'>Blog</Link></li>
+        </>
+        
+      }
       </ul>
     </div>
     <a className="btn btn-ghost normal-case text-2xl text-white font-bold"><img src={logo} alt=''className='h-15 w-10 p-2'/>Furniture Mountain</a>

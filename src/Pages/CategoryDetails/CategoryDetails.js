@@ -7,6 +7,7 @@ const CategoryDetails = () => {
     console.log(categoryDetails)
     return (
         <div className=''>
+          <div className=''>
            {
               categoryDetails.map(details => <CategoryDetailsCard
                 key={details._id}
@@ -14,6 +15,7 @@ const CategoryDetails = () => {
                 ></CategoryDetailsCard>
               )
             }
+        </div>
         </div>
     );
 };

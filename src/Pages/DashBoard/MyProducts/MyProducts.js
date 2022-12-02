@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../Contexts/Authprovider';
+import MyProduct from '../../MyProduct/MyProduct';
 
 const MyProducts = () => {
     const {user} = useContext(AuthContext);
@@ -12,7 +13,7 @@ const MyProducts = () => {
             return data;
         }
     });
-
+   console.log(products)
     return (
         <div>
             <h2 className='text-3xl'>My Products</h2>
@@ -28,12 +29,10 @@ const MyProducts = () => {
                     </thead>
                     <tbody>
                         {
-                            products.map(product => <tr className="hover">
-                                <th>{product.name}</th>
-                                <td>{product.re_price}</td>
-                                <td>Advertise</td>
-                                <td>Delete</td>
-                        </tr>)
+                            products.map(product=><MyProduct
+                            key={product._id}
+                            product={product}
+                            ></MyProduct>)
                         }
                     </tbody>
                 </table>
