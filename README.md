@@ -1,4 +1,4 @@
-Live Website Link:
+Live Website Link: https://resale-market-4fdb3.web.app
 
 adminGmail: tuki123@gmail.com
 adminPassword: 111111
