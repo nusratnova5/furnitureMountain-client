@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/Authprovider';
 import useToken from '../../hooks/useToken';
+import { useEffect } from 'react';
 
 const LogIn = () => {
     const {LogIn,googleLogIn}=useContext(AuthContext);
@@ -15,12 +16,16 @@ const LogIn = () => {
     const [loginUserEmail, setLogInUserEmail] = useState('');
     const [token] = useToken(loginUserEmail);
 
-    console.log(token);
+    
+    useEffect(() => {
+        if(token){
+            navigate(from, {replace: true});
+            console.log(token);
+         }
+     
+    },[token]);
 
-    if(token){
-        navigate(from, {replace: true});
-    }
-
+    
     const { register, formState:{errors}, handleSubmit } = useForm();
     const handleLogin=data=>{
         LogIn(data.email,data.password)
@@ -49,8 +54,8 @@ const LogIn = () => {
         <div className='h-[800px] flex justify-center items-center bg-slate-200  '>
             <div className='w-96 p-7 bg-cyan-700 rounded'>
                 <h2 className='text-4xl font-bold text-white mb-5'>SIGN IN</h2>
-                <form onSubmit={ handleSubmit(handleLogin) }>
-                    <div className="form-control w-full max-w-xs mb-5">
+                <form onSubmit={  handleSubmit(handleLogin) }>                   
+                 <div className="form-control w-full max-w-xs mb-5">
                         <label className="label">
                             <span className="label-text text-white">Enter Your Email</span>
                         </label>

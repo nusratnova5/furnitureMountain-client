@@ -66,7 +66,7 @@ const Header = () => {
     {
       user?.uid?
       <>
-      <Link to='' className="btn className='text-white'"><button onClick={handlelogOut}>SIGN OUT</button></Link>
+      <Link  className="btn className='text-white'"><button onClick={handlelogOut}>SIGN OUT</button></Link>
       </>
       :
       <>
